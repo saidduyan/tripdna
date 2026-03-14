@@ -1,160 +1,268 @@
 import '../models/quiz_question.dart';
 
 const List<QuizQuestion> quizQuestions = [
-  // Q1: Beach vs Mountain
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q01_a.png',
+      imageAsset: 'assets/images/q1a.png',
       label: 'Turquoise beach',
-      tagWeights: {'beach': 2.0, 'relax': 1.0},
+      tagWeights: {
+        'beach': 5, 'relax': 4, 'wellness': 3, 'quiet': 3,
+        'luxury': 2, 'adventure': 2, 'hidden': 2, 'boutique': 2,
+        'mountain': 1, 'city': 1, 'culture': 1, 'nightlife': 1,
+        'food_street': 1, 'food_fine': 1, 'landmarks': 1, 'modern': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q01_b.png',
+      imageAsset: 'assets/images/q1b.png',
       label: 'Snowy mountain',
-      tagWeights: {'mountain': 2.0, 'adventure': 1.0},
+      tagWeights: {
+        'mountain': 5, 'adventure': 4, 'quiet': 4, 'relax': 3,
+        'wellness': 3, 'hidden': 2, 'luxury': 2, 'boutique': 2,
+        'beach': 1, 'city': 1, 'culture': 1, 'landmarks': 1,
+        'food_street': 1, 'food_fine': 1, 'nightlife': 1, 'modern': 1,
+      },
     ),
   ),
-  // Q2: Bustling city vs Hidden village
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q02_a.png',
+      imageAsset: 'assets/images/q2a.png',
       label: 'Bustling city',
-      tagWeights: {'city': 2.0, 'nightlife': 1.0},
+      tagWeights: {
+        'city': 5, 'modern': 4, 'nightlife': 4, 'food_street': 3,
+        'food_fine': 3, 'culture': 3, 'landmarks': 2, 'adventure': 2,
+        'luxury': 2, 'beach': 1, 'mountain': 1, 'quiet': 1,
+        'relax': 1, 'wellness': 1, 'hidden': 1, 'boutique': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q02_b.png',
+      imageAsset: 'assets/images/q2b.png',
       label: 'Hidden village',
-      tagWeights: {'hidden': 2.0, 'quiet': 1.5},
+      tagWeights: {
+        'hidden': 5, 'quiet': 5, 'culture': 4, 'boutique': 4,
+        'relax': 3, 'wellness': 2, 'food_street': 2, 'adventure': 2,
+        'mountain': 2, 'landmarks': 2, 'city': 1, 'modern': 1,
+        'nightlife': 1, 'luxury': 1, 'beach': 1, 'food_fine': 1,
+      },
     ),
   ),
-  // Q3: Street food market vs Fine dining
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q03_a.png',
+      imageAsset: 'assets/images/q3a.png',
       label: 'Street food market',
-      tagWeights: {'food_street': 2.5, 'culture': 1.0},
+      tagWeights: {
+        'food_street': 5, 'culture': 4, 'city': 3, 'adventure': 3,
+        'hidden': 2, 'nightlife': 2, 'boutique': 2, 'landmarks': 2,
+        'relax': 1, 'quiet': 1, 'food_fine': 1, 'modern': 1,
+        'luxury': 1, 'wellness': 1, 'beach': 1, 'mountain': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q03_b.png',
+      imageAsset: 'assets/images/q3b.png',
       label: 'Fine dining',
-      tagWeights: {'food_fine': 2.5, 'luxury': 1.0},
+      tagWeights: {
+        'food_fine': 5, 'luxury': 4, 'boutique': 4, 'modern': 3,
+        'city': 3, 'relax': 2, 'wellness': 2, 'nightlife': 2,
+        'culture': 2, 'food_street': 1, 'hidden': 1, 'landmarks': 1,
+        'quiet': 1, 'beach': 1, 'mountain': 1, 'adventure': 1,
+      },
     ),
   ),
-  // Q4: Ancient ruins vs Modern skyline
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q04_a.png',
+      imageAsset: 'assets/images/q4a.png',
       label: 'Ancient ruins',
-      tagWeights: {'landmarks': 2.0, 'culture': 1.5},
+      tagWeights: {
+        'landmarks': 5, 'culture': 5, 'hidden': 3, 'adventure': 3,
+        'quiet': 3, 'boutique': 2, 'mountain': 2, 'relax': 2,
+        'food_street': 2, 'city': 1, 'modern': 1, 'nightlife': 1,
+        'luxury': 1, 'wellness': 1, 'beach': 1, 'food_fine': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q04_b.png',
+      imageAsset: 'assets/images/q4b.png',
       label: 'Modern skyline',
-      tagWeights: {'modern': 2.0, 'city': 1.0},
+      tagWeights: {
+        'modern': 5, 'city': 5, 'nightlife': 4, 'luxury': 3,
+        'food_fine': 3, 'adventure': 2, 'food_street': 2, 'culture': 2,
+        'landmarks': 2, 'boutique': 1, 'wellness': 1, 'relax': 1,
+        'quiet': 1, 'beach': 1, 'mountain': 1, 'hidden': 1,
+      },
     ),
   ),
-  // Q5: Spa retreat vs Adventure trek
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q05_a.png',
+      imageAsset: 'assets/images/q5a.png',
       label: 'Spa retreat',
-      tagWeights: {'wellness': 2.5, 'relax': 1.5, 'luxury': 0.5},
+      tagWeights: {
+        'wellness': 5, 'relax': 5, 'luxury': 4, 'boutique': 3,
+        'quiet': 3, 'food_fine': 2, 'hidden': 2, 'beach': 2,
+        'mountain': 2, 'culture': 1, 'food_street': 1, 'city': 1,
+        'modern': 1, 'adventure': 1, 'nightlife': 1, 'landmarks': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q05_b.png',
+      imageAsset: 'assets/images/q5b.png',
       label: 'Adventure trek',
-      tagWeights: {'adventure': 2.5, 'mountain': 1.0},
+      tagWeights: {
+        'adventure': 5, 'mountain': 4, 'hidden': 4, 'quiet': 3,
+        'relax': 2, 'culture': 2, 'landmarks': 2, 'wellness': 2,
+        'food_street': 2, 'beach': 1, 'city': 1, 'modern': 1,
+        'luxury': 1, 'boutique': 1, 'nightlife': 1, 'food_fine': 1,
+      },
     ),
   ),
-  // Q6: Crowded festival vs Quiet sunrise
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q06_a.png',
+      imageAsset: 'assets/images/q6a.png',
       label: 'Crowded festival',
-      tagWeights: {'nightlife': 1.5, 'culture': 1.5},
+      tagWeights: {
+        'nightlife': 4, 'culture': 5, 'food_street': 4, 'city': 3,
+        'adventure': 3, 'landmarks': 2, 'modern': 2, 'boutique': 2,
+        'food_fine': 1, 'relax': 1, 'wellness': 1, 'quiet': 1,
+        'luxury': 1, 'hidden': 1, 'beach': 1, 'mountain': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q06_b.png',
+      imageAsset: 'assets/images/q6b.png',
       label: 'Quiet sunrise',
-      tagWeights: {'quiet': 2.5, 'relax': 1.0},
+      tagWeights: {
+        'quiet': 5, 'relax': 5, 'wellness': 4, 'hidden': 3,
+        'mountain': 3, 'beach': 3, 'boutique': 2, 'culture': 2,
+        'adventure': 2, 'landmarks': 1, 'luxury': 1, 'food_fine': 1,
+        'city': 1, 'modern': 1, 'nightlife': 1, 'food_street': 1,
+      },
     ),
   ),
-  // Q7: Luxury resort vs Budget hostel
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q07_a.png',
+      imageAsset: 'assets/images/q7a.png',
       label: 'Luxury resort',
-      tagWeights: {'luxury': 3.0, 'wellness': 0.5},
+      tagWeights: {
+        'luxury': 5, 'wellness': 4, 'relax': 4, 'food_fine': 4,
+        'boutique': 3, 'beach': 3, 'quiet': 2, 'modern': 2,
+        'city': 2, 'culture': 1, 'nightlife': 2, 'landmarks': 1,
+        'adventure': 1, 'hidden': 1, 'mountain': 1, 'food_street': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q07_b.png',
+      imageAsset: 'assets/images/q7b.png',
       label: 'Budget hostel',
-      tagWeights: {'hidden': 1.0, 'food_street': 1.0, 'quiet': 0.5},
+      tagWeights: {
+        'hidden': 4, 'food_street': 4, 'adventure': 4, 'culture': 3,
+        'city': 3, 'nightlife': 3, 'boutique': 2, 'quiet': 2,
+        'relax': 2, 'landmarks': 2, 'mountain': 1, 'beach': 1,
+        'modern': 1, 'luxury': 1, 'wellness': 1, 'food_fine': 1,
+      },
     ),
   ),
-  // Q8: Tropical jungle vs Desert dunes
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q08_a.png',
+      imageAsset: 'assets/images/q8a.png',
       label: 'Tropical jungle',
-      tagWeights: {'adventure': 1.5, 'beach': 1.0, 'relax': 1.0},
+      tagWeights: {
+        'adventure': 5, 'hidden': 4, 'wellness': 3, 'quiet': 3,
+        'beach': 3, 'relax': 3, 'mountain': 2, 'culture': 2,
+        'food_street': 2, 'boutique': 2, 'luxury': 1, 'landmarks': 1,
+        'city': 1, 'modern': 1, 'nightlife': 1, 'food_fine': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q08_b.png',
+      imageAsset: 'assets/images/q8b.png',
       label: 'Desert dunes',
-      tagWeights: {'hidden': 1.5, 'landmarks': 1.0, 'quiet': 1.0},
+      tagWeights: {
+        'hidden': 5, 'quiet': 4, 'adventure': 4, 'landmarks': 3,
+        'culture': 3, 'relax': 2, 'boutique': 2, 'wellness': 2,
+        'mountain': 2, 'food_street': 2, 'luxury': 1, 'beach': 1,
+        'city': 1, 'modern': 1, 'nightlife': 1, 'food_fine': 1,
+      },
     ),
   ),
-  // Q9: Night clubs vs Rooftop bars
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q09_a.png',
+      imageAsset: 'assets/images/q9a.png',
       label: 'Night clubs',
-      tagWeights: {'nightlife': 3.0},
+      tagWeights: {
+        'nightlife': 5, 'city': 4, 'modern': 3, 'adventure': 3,
+        'food_street': 2, 'food_fine': 2, 'luxury': 2, 'culture': 2,
+        'boutique': 1, 'landmarks': 1, 'relax': 1, 'wellness': 1,
+        'quiet': 1, 'hidden': 1, 'beach': 1, 'mountain': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q09_b.png',
+      imageAsset: 'assets/images/q9b.png',
       label: 'Rooftop bar',
-      tagWeights: {'city': 1.5, 'luxury': 1.0, 'nightlife': 0.5},
+      tagWeights: {
+        'city': 4, 'luxury': 4, 'nightlife': 3, 'modern': 4,
+        'food_fine': 3, 'boutique': 3, 'relax': 2, 'culture': 2,
+        'landmarks': 2, 'wellness': 1, 'adventure': 1, 'hidden': 1,
+        'quiet': 1, 'beach': 1, 'mountain': 1, 'food_street': 1,
+      },
     ),
   ),
-  // Q10: Local museum vs Street art
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q10_a.png',
+      imageAsset: 'assets/images/q10a.png',
       label: 'Local museum',
-      tagWeights: {'culture': 2.5, 'landmarks': 1.0},
+      tagWeights: {
+        'culture': 5, 'landmarks': 5, 'quiet': 3, 'hidden': 3,
+        'boutique': 2, 'relax': 2, 'city': 2, 'food_fine': 2,
+        'wellness': 1, 'modern': 1, 'adventure': 1, 'food_street': 1,
+        'nightlife': 1, 'luxury': 1, 'beach': 1, 'mountain': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q10_b.png',
+      imageAsset: 'assets/images/q10b.png',
       label: 'Street art district',
-      tagWeights: {'city': 1.5, 'hidden': 1.0, 'modern': 0.5},
+      tagWeights: {
+        'city': 4, 'modern': 4, 'culture': 4, 'hidden': 3,
+        'adventure': 3, 'food_street': 3, 'nightlife': 2, 'boutique': 2,
+        'landmarks': 2, 'relax': 1, 'quiet': 1, 'luxury': 1,
+        'wellness': 1, 'food_fine': 1, 'beach': 1, 'mountain': 1,
+      },
     ),
   ),
-  // Q11: Island hopping vs Mountain cabin
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q11_a.png',
+      imageAsset: 'assets/images/q11a.png',
       label: 'Island hopping',
-      tagWeights: {'beach': 2.0, 'adventure': 1.0},
+      tagWeights: {
+        'beach': 5, 'adventure': 4, 'hidden': 3, 'relax': 3,
+        'wellness': 2, 'boutique': 2, 'food_street': 2, 'luxury': 2,
+        'quiet': 2, 'culture': 2, 'mountain': 1, 'city': 1,
+        'modern': 1, 'nightlife': 1, 'food_fine': 1, 'landmarks': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q11_b.png',
+      imageAsset: 'assets/images/q11b.png',
       label: 'Mountain cabin',
-      tagWeights: {'mountain': 2.0, 'quiet': 1.5, 'relax': 1.0},
+      tagWeights: {
+        'mountain': 5, 'quiet': 5, 'relax': 4, 'wellness': 4,
+        'hidden': 3, 'boutique': 3, 'adventure': 2, 'food_fine': 2,
+        'culture': 1, 'landmarks': 1, 'luxury': 2, 'city': 1,
+        'modern': 1, 'nightlife': 1, 'beach': 1, 'food_street': 1,
+      },
     ),
   ),
-  // Q12: Famous landmark vs Off-the-beaten path
   QuizQuestion(
     optionA: QuizOption(
-      imageAsset: 'assets/images/q12_a.png',
+      imageAsset: 'assets/images/q12a.png',
       label: 'Iconic landmark',
-      tagWeights: {'landmarks': 2.5, 'culture': 1.0},
+      tagWeights: {
+        'landmarks': 5, 'culture': 4, 'city': 3, 'adventure': 2,
+        'modern': 2, 'food_fine': 2, 'food_street': 2, 'luxury': 2,
+        'boutique': 2, 'nightlife': 1, 'relax': 1, 'wellness': 1,
+        'quiet': 1, 'hidden': 1, 'beach': 1, 'mountain': 1,
+      },
     ),
     optionB: QuizOption(
-      imageAsset: 'assets/images/q12_b.png',
+      imageAsset: 'assets/images/q12b.png',
       label: 'Off-the-beaten path',
-      tagWeights: {'hidden': 3.0, 'quiet': 1.0},
+      tagWeights: {
+        'hidden': 5, 'quiet': 4, 'adventure': 4, 'culture': 3,
+        'boutique': 3, 'relax': 3, 'wellness': 2, 'mountain': 2,
+        'food_street': 2, 'landmarks': 1, 'luxury': 1, 'beach': 1,
+        'city': 1, 'modern': 1, 'nightlife': 1, 'food_fine': 1,
+      },
     ),
   ),
 ];

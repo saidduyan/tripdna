@@ -11,11 +11,8 @@ class QuizOption {
 }
 
 class QuizQuestion {
-  final QuizOption optionA; // top
-  final QuizOption optionB; // bottom
+  final QuizOption optionA;
+  final QuizOption optionB;
 
-  const QuizQuestion({
-    required this.optionA,
-    required this.optionB,
-  });
+  const QuizQuestion({required this.optionA, required this.optionB});
 }

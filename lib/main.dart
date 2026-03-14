@@ -1,26 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:trip_tuner/screens/auth_gate.dart';
-import 'firebase_options.dart';
+import 'screens/auth_gate.dart';
 
-
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  runApp(const TripTunerApp());
+  await Firebase.initializeApp();
+  runApp(const TripDNAApp());
 }
 
-class TripTunerApp extends StatelessWidget {
-  const TripTunerApp({super.key});
+class TripDNAApp extends StatelessWidget {
+  const TripDNAApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'TripTuner',
+      title: 'TripDNA',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -28,7 +22,6 @@ class TripTunerApp extends StatelessWidget {
           brightness: Brightness.light,
         ),
         useMaterial3: true,
-        fontFamily: 'Roboto',
       ),
       home: const AuthGate(),
     );

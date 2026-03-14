@@ -1,40 +1,27 @@
 class Destination {
   final String name;
-  final String subtitle;
+  final String country;
   final String continent;
-  final bool isCity;
-  final bool isBeach;
-  final bool isNature;
-  final bool isMountain;
-  final bool isCulture;
-  final bool isLandmarks;
-  final bool isLuxury;
-  final bool isWellness;
-  final bool isNightlife;
-  final bool isModern;
-  final bool isFoodKnown;
+  final String subtitle;
+  final List<String> imageAssets; // up to 5
+  final Map<String, double> tagAffinities;
+  final int budgetLevel; // 0=low, 1=mid, 2=high
   final bool longStayFriendly;
   final bool shortTripFriendly;
-  // premium: 0=budget, 1=medium, 2=high
-  final int premiumLevel;
+  final Map<String, bool> amenities;
 
   const Destination({
     required this.name,
-    required this.subtitle,
+    required this.country,
     required this.continent,
-    this.isCity = false,
-    this.isBeach = false,
-    this.isNature = false,
-    this.isMountain = false,
-    this.isCulture = false,
-    this.isLandmarks = false,
-    this.isLuxury = false,
-    this.isWellness = false,
-    this.isNightlife = false,
-    this.isModern = false,
-    this.isFoodKnown = false,
+    required this.subtitle,
+    required this.imageAssets,
+    required this.tagAffinities,
+    required this.budgetLevel,
     this.longStayFriendly = false,
     this.shortTripFriendly = false,
-    required this.premiumLevel,
+    required this.amenities,
   });
+
+  double affinity(String tag) => tagAffinities[tag] ?? 0.0;
 }

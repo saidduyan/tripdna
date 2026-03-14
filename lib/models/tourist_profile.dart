@@ -1,4 +1,4 @@
-enum BudgetFlex { strict, flexible, wide }
+enum BudgetFlex { tight, medium, flexible }
 enum StayChange { longer, shorter }
 enum PrimaryVibe { urban, nature, culture, luxury, balanced }
 enum Pace { dynamic_, slow }
@@ -29,9 +29,16 @@ class TouristDNA {
   }
 
   String get summary =>
-      '$primaryVibeLabel · ${pace == Pace.dynamic_ ? 'Dynamic pace' : 'Slow pace'} · '
+      '$primaryVibeLabel · ${pace == Pace.dynamic_ ? 'Dynamic' : 'Slow'} pace · '
       '${crowd == CrowdPref.social ? 'Social' : 'Low-crowd'} · '
-      '${comfort == ComfortPref.luxury ? 'Luxury comfort' : 'Simple comfort'}';
+      '${comfort == ComfortPref.luxury ? 'Luxury' : 'Simple'} comfort';
+
+  Map<String, dynamic> toMap() => {
+    'primaryVibe': primaryVibe.name,
+    'pace': pace.name,
+    'crowd': crowd.name,
+    'comfort': comfort.name,
+  };
 }
 
 class TouristProfile {
@@ -44,4 +51,10 @@ class TouristProfile {
     required this.stayChange,
     required this.budgetFlex,
   });
+
+  Map<String, dynamic> toMap() => {
+    'homeContinent': homeContinent,
+    'stayChange': stayChange.name,
+    'budgetFlex': budgetFlex.name,
+  };
 }

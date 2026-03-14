@@ -17,7 +17,6 @@ class PhotoCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-
     return GestureDetector(
       onTap: onTap,
       child: AnimatedContainer(
@@ -25,9 +24,7 @@ class PhotoCard extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isSelected
-                ? theme.colorScheme.primary
-                : Colors.transparent,
+            color: isSelected ? theme.colorScheme.primary : Colors.transparent,
             width: 3,
           ),
           boxShadow: [
@@ -45,34 +42,19 @@ class PhotoCard extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              _buildImage(imageAsset, label),
-              // Gradient overlay for label
-              Positioned(
-                bottom: 0,
-                left: 0,
-                right: 0,
-                child: Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.bottomCenter,
-                      end: Alignment.topCenter,
-                      colors: [
-                        Colors.black.withOpacity(0.7),
-                        Colors.transparent,
-                      ],
-                    ),
-                  ),
-                  child: Text(
-                    label,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                      fontSize: 16,
-                    ),
+              Image.asset(
+                imageAsset,
+                fit: BoxFit.cover,
+                errorBuilder: (_, __, ___) => Container(
+                  color: Colors.grey.shade300,
+                  child: Icon(
+                    Icons.image_not_supported_outlined,
+                    size: 48,
+                    color: Colors.grey.shade500,
                   ),
                 ),
               ),
+              // Selected checkmark only — no label
               if (isSelected)
                 Positioned(
                   top: 12,
@@ -90,33 +72,6 @@ class PhotoCard extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-  Widget _buildImage(String asset, String fallbackLabel) {
-    return Image.asset(
-      asset,
-      fit: BoxFit.cover,
-      errorBuilder: (context, error, stackTrace) {
-        return Container(
-          color: Colors.grey.shade300,
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Icon(Icons.image_not_supported_outlined,
-                    size: 40, color: Colors.grey.shade600),
-                const SizedBox(height: 8),
-                Text(
-                  fallbackLabel,
-                  style: TextStyle(color: Colors.grey.shade700, fontSize: 14),
-                  textAlign: TextAlign.center,
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

@@ -63,11 +63,7 @@ class MatchService {
     return snap.docs
         .where((d) => !excludeUids.contains(d.id))
         .map((d) => Traveler.fromMap(d.data() as Map<String, dynamic>))
-        .where((t) {
-          final age = t.age;
-          if (age == null) return true;
-          return age >= minAge && age <= maxAge;
-        })
+        .where((t) => t.age >= minAge && t.age <= maxAge)
         .toList();
   }
 

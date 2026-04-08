@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../data/quiz_data.dart';
-import '../models/quiz_question.dart';
 import '../widgets/photo_card.dart';
 import '../widgets/progress_header.dart';
 import 'profile_screen.dart';

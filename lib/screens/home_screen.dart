@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
           NavigationDestination(
             icon: Icon(Icons.calendar_month_outlined),
             selectedIcon: Icon(Icons.calendar_month),
-            label: 'En İyi Zaman',
+            label: 'Best Timing',
           ),
         ],
       ),

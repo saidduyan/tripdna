@@ -22,11 +22,22 @@ class _StartScreenState extends State<StartScreen> {
   }
 
   Future<void> _loadProfile() async {
-    final uid = FirebaseAuth.instance.currentUser?.uid;
-    if (uid != null) {
-      final profile = await AuthService().getUserProfile(uid);
-      if (mounted) setState(() { _profile = profile; _loading = false; });
-    } else {
+    try {
+      final uid = FirebaseAuth.instance.currentUser?.uid;
+      if (uid != null) {
+        final profile = await AuthService()
+            .getUserProfile(uid)
+            .timeout(const Duration(seconds: 5)); // ← timeout ekle
+        if (mounted)
+          setState(() {
+            _profile = profile;
+            _loading = false;
+          });
+      } else {
+        if (mounted) setState(() => _loading = false);
+      }
+    } catch (e) {
+      // timeout veya hata olursa yine de devam et
       if (mounted) setState(() => _loading = false);
     }
   }
@@ -68,7 +79,8 @@ class _StartScreenState extends State<StartScreen> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           IconButton(
-                            icon: const Icon(Icons.logout, color: Colors.white70),
+                            icon:
+                                const Icon(Icons.logout, color: Colors.white70),
                             onPressed: _logout,
                             tooltip: 'Sign out',
                           ),

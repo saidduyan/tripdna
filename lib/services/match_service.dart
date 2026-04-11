@@ -41,11 +41,8 @@ class MatchService {
     required int minAge,
     required int maxAge,
   }) async {
-    final sentSnap = await _db
-        .collection('likes')
-        .doc(_uid)
-        .collection('sent')
-        .get();
+    final sentSnap =
+        await _db.collection('likes').doc(_uid).collection('sent').get();
     final excludeUids = sentSnap.docs.map((d) => d.id).toSet()..add(_uid);
 
     Query query = _db
@@ -64,11 +61,9 @@ class MatchService {
         .where((d) => !excludeUids.contains(d.id))
         .map((d) => Traveler.fromMap(d.data() as Map<String, dynamic>))
         .where((t) {
-          final age = t.age;
-          if (age == null) return true;
-          return age >= minAge && age <= maxAge;
-        })
-        .toList();
+      final age = t.age;
+      return age >= minAge && age <= maxAge;
+    }).toList();
   }
 
   // ── Like / Pass ────────────────────────────────────────────
@@ -144,11 +139,7 @@ class MatchService {
     required String matchId,
     required String text,
   }) async {
-    await _db
-        .collection('matches')
-        .doc(matchId)
-        .collection('msgs')
-        .add({
+    await _db.collection('matches').doc(matchId).collection('msgs').add({
       'senderId': _uid,
       'text': text.trim(),
       'createdAt': FieldValue.serverTimestamp(),

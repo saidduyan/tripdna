@@ -17,9 +17,11 @@ class ProgressHeader extends StatelessWidget {
             children: [
               Text('Photo picks $current/$total',
                   style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.w600, color: theme.colorScheme.primary)),
+                      fontWeight: FontWeight.w600,
+                      color: theme.colorScheme.primary)),
               Text('${((current / total) * 100).toInt()}%',
-                  style: theme.textTheme.bodyMedium?.copyWith(color: theme.colorScheme.outline)),
+                  style: theme.textTheme.bodyMedium
+                      ?.copyWith(color: theme.colorScheme.outline)),
             ],
           ),
         ),
@@ -30,8 +32,9 @@ class ProgressHeader extends StatelessWidget {
             child: LinearProgressIndicator(
               value: current / total,
               minHeight: 6,
-              backgroundColor: theme.colorScheme.surfaceVariant,
-              valueColor: AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
+              backgroundColor: theme.colorScheme.surfaceContainerHighest,
+              valueColor:
+                  AlwaysStoppedAnimation<Color>(theme.colorScheme.primary),
             ),
           ),
         ),

@@ -42,15 +42,15 @@ class _BestTimeScreenState extends State<BestTimeScreen> {
       ),
       body: Column(children: [
         Container(
-          color: theme.colorScheme.surfaceVariant,
+          color: theme.colorScheme.surfaceContainerHighest,
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: DropdownButtonFormField<String>(
-            value: _selected,
+            initialValue: _selected,
             decoration: InputDecoration(
               labelText: 'Select a destination',
               prefixIcon: const Icon(Icons.place_outlined),
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12)),
+              border:
+                  OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
               filled: true,
               fillColor: theme.colorScheme.surface,
             ),
@@ -95,7 +95,6 @@ class _BestTimeScreenState extends State<BestTimeScreen> {
     return SingleChildScrollView(
       padding: const EdgeInsets.all(20),
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-
         // Sweet spot banner
         if (t.sweetSpotMonths.isNotEmpty)
           Container(
@@ -108,30 +107,29 @@ class _BestTimeScreenState extends State<BestTimeScreen> {
               ]),
               borderRadius: BorderRadius.circular(16),
             ),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Row(children: [
-                    Icon(Icons.auto_awesome, color: Colors.white, size: 18),
-                    SizedBox(width: 8),
-                    Text('Ideal Period',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16)),
-                  ]),
-                  const SizedBox(height: 6),
-                  Text(t.sweetSpotMonths.join(' · '),
-                      style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold)),
-                  const SizedBox(height: 4),
-                  Text('Good weather + reasonable price balance',
-                      style: TextStyle(
-                          color: Colors.white.withValues(alpha: 0.85),
-                          fontSize: 13)),
-                ]),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              const Row(children: [
+                Icon(Icons.auto_awesome, color: Colors.white, size: 18),
+                SizedBox(width: 8),
+                Text('Ideal Period',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16)),
+              ]),
+              const SizedBox(height: 6),
+              Text(t.sweetSpotMonths.join(' · '),
+                  style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+              const SizedBox(height: 4),
+              Text('Good weather + reasonable price balance',
+                  style: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.85),
+                      fontSize: 13)),
+            ]),
           ),
 
         const SizedBox(height: 20),
@@ -155,9 +153,8 @@ class _BestTimeScreenState extends State<BestTimeScreen> {
             child: _SummaryCard(
               icon: Icons.savings_outlined,
               label: 'Cheapest',
-              value: t.cheapMonths.isEmpty
-                  ? 'No data'
-                  : t.cheapMonths.join(', '),
+              value:
+                  t.cheapMonths.isEmpty ? 'No data' : t.cheapMonths.join(', '),
               color: Colors.green,
               theme: theme,
             ),
@@ -366,8 +363,7 @@ class _LegendDot extends StatelessWidget {
         Container(
             width: 10,
             height: 10,
-            decoration:
-                BoxDecoration(color: color, shape: BoxShape.circle)),
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle)),
         const SizedBox(width: 4),
         Text(label, style: const TextStyle(fontSize: 11)),
       ]);
@@ -404,9 +400,7 @@ class _SummaryCard extends StatelessWidget {
             const SizedBox(width: 6),
             Text(label,
                 style: TextStyle(
-                    color: color,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 12)),
+                    color: color, fontWeight: FontWeight.w600, fontSize: 12)),
           ]),
           const SizedBox(height: 6),
           Text(value,
@@ -433,9 +427,7 @@ class _MonthDetailRow extends StatelessWidget {
             margin: const EdgeInsets.only(right: 2),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: i < value
-                  ? color
-                  : color.withValues(alpha: 0.15),
+              color: i < value ? color : color.withValues(alpha: 0.15),
             ),
           ),
         ),
@@ -444,10 +436,10 @@ class _MonthDetailRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
         margin: const EdgeInsets.only(bottom: 8),
-        padding:
-            const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
         decoration: BoxDecoration(
-          color: theme.colorScheme.surfaceVariant.withValues(alpha: 0.5),
+          color:
+              theme.colorScheme.surfaceContainerHighest.withValues(alpha: 0.5),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(children: [
@@ -458,32 +450,27 @@ class _MonthDetailRow extends StatelessWidget {
                       fontWeight: FontWeight.bold, fontSize: 13))),
           const SizedBox(width: 8),
           Expanded(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(month.weatherDesc,
-                      style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.outline)),
-                  const SizedBox(height: 4),
-                  Row(children: [
-                    _dots(month.priceIndex, Colors.red),
-                    const SizedBox(width: 8),
-                    Text('\$',
-                        style: TextStyle(
-                            fontSize: 10,
-                            color: Colors.red.shade300)),
-                    const SizedBox(width: 12),
-                    _dots(month.weatherScore, Colors.blue),
-                    const SizedBox(width: 8),
-                    Icon(Icons.wb_sunny,
-                        size: 10, color: Colors.blue.shade300),
-                    const SizedBox(width: 12),
-                    _dots(month.crowdIndex, Colors.orange),
-                    const SizedBox(width: 8),
-                    Icon(Icons.people,
-                        size: 10, color: Colors.orange.shade300),
-                  ]),
-                ]),
+            child:
+                Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+              Text(month.weatherDesc,
+                  style: theme.textTheme.bodySmall
+                      ?.copyWith(color: theme.colorScheme.outline)),
+              const SizedBox(height: 4),
+              Row(children: [
+                _dots(month.priceIndex, Colors.red),
+                const SizedBox(width: 8),
+                Text('\$',
+                    style: TextStyle(fontSize: 10, color: Colors.red.shade300)),
+                const SizedBox(width: 12),
+                _dots(month.weatherScore, Colors.blue),
+                const SizedBox(width: 8),
+                Icon(Icons.wb_sunny, size: 10, color: Colors.blue.shade300),
+                const SizedBox(width: 12),
+                _dots(month.crowdIndex, Colors.orange),
+                const SizedBox(width: 8),
+                Icon(Icons.people, size: 10, color: Colors.orange.shade300),
+              ]),
+            ]),
           ),
         ]),
       );

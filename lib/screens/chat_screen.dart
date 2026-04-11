@@ -66,17 +66,22 @@ class _ChatScreenState extends State<ChatScreen> {
             radius: 18,
             backgroundColor: theme.colorScheme.primaryContainer,
             child: Text(widget.otherName[0].toUpperCase(),
-                style: TextStyle(fontWeight: FontWeight.bold,
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
                     color: theme.colorScheme.onPrimaryContainer)),
           ),
           const SizedBox(width: 10),
           Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Text(widget.otherName, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+            Text(widget.otherName,
+                style:
+                    const TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             Row(children: [
-              Icon(Icons.flight_takeoff, size: 12, color: theme.colorScheme.primary),
+              Icon(Icons.flight_takeoff,
+                  size: 12, color: theme.colorScheme.primary),
               const SizedBox(width: 4),
               Text(widget.destination,
-                  style: TextStyle(fontSize: 12, color: theme.colorScheme.primary)),
+                  style: TextStyle(
+                      fontSize: 12, color: theme.colorScheme.primary)),
             ]),
           ]),
         ]),
@@ -90,26 +95,37 @@ class _ChatScreenState extends State<ChatScreen> {
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Icon(Icons.favorite, size: 16, color: theme.colorScheme.primary),
             const SizedBox(width: 8),
-            Text('You matched! Plan your trip to ${widget.destination} together 🌍',
-                style: TextStyle(color: theme.colorScheme.onPrimaryContainer,
-                    fontWeight: FontWeight.w500, fontSize: 13)),
+            Text(
+                'You matched! Plan your trip to ${widget.destination} together 🌍',
+                style: TextStyle(
+                    color: theme.colorScheme.onPrimaryContainer,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 13)),
           ]),
         ),
         // Messages
-        Expanded(child: StreamBuilder<QuerySnapshot>(
+        Expanded(
+            child: StreamBuilder<QuerySnapshot>(
           stream: _service.getMessages(widget.matchId),
           builder: (context, snapshot) {
-            if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+            if (!snapshot.hasData)
+              return const Center(child: CircularProgressIndicator());
             final msgs = snapshot.data!.docs;
             if (msgs.isEmpty) {
-              return Center(child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Icon(Icons.waving_hand, size: 48, color: theme.colorScheme.primary),
-                const SizedBox(height: 12),
-                Text('Say hi to ${widget.otherName.split(' ').first}! 👋',
-                    style: theme.textTheme.bodyLarge?.copyWith(color: theme.colorScheme.outline)),
-              ]));
+              return Center(
+                  child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                    Icon(Icons.waving_hand,
+                        size: 48, color: theme.colorScheme.primary),
+                    const SizedBox(height: 12),
+                    Text('Say hi to ${widget.otherName.split(' ').first}! 👋',
+                        style: theme.textTheme.bodyLarge
+                            ?.copyWith(color: theme.colorScheme.outline)),
+                  ]));
             }
-            WidgetsBinding.instance.addPostFrameCallback((_) => _scrollToBottom());
+            WidgetsBinding.instance
+                .addPostFrameCallback((_) => _scrollToBottom());
             return ListView.builder(
               controller: _scrollController,
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -124,13 +140,18 @@ class _ChatScreenState extends State<ChatScreen> {
                     : '';
 
                 return Align(
-                  alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                  alignment:
+                      isMe ? Alignment.centerRight : Alignment.centerLeft,
                   child: Container(
                     margin: const EdgeInsets.only(bottom: 8),
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                    constraints: BoxConstraints(maxWidth: MediaQuery.of(context).size.width * 0.72),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 14, vertical: 10),
+                    constraints: BoxConstraints(
+                        maxWidth: MediaQuery.of(context).size.width * 0.72),
                     decoration: BoxDecoration(
-                      color: isMe ? theme.colorScheme.primary : theme.colorScheme.surfaceVariant,
+                      color: isMe
+                          ? theme.colorScheme.primary
+                          : theme.colorScheme.surfaceContainerHighest,
                       borderRadius: BorderRadius.only(
                         topLeft: const Radius.circular(18),
                         topRight: const Radius.circular(18),
@@ -138,15 +159,23 @@ class _ChatScreenState extends State<ChatScreen> {
                         bottomRight: Radius.circular(isMe ? 4 : 18),
                       ),
                     ),
-                    child: Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                      Text(text, style: TextStyle(
-                          color: isMe ? Colors.white : theme.colorScheme.onSurface,
-                          fontSize: 15)),
-                      const SizedBox(height: 2),
-                      Text(time, style: TextStyle(
-                          fontSize: 10,
-                          color: isMe ? Colors.white70 : theme.colorScheme.outline)),
-                    ]),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        children: [
+                          Text(text,
+                              style: TextStyle(
+                                  color: isMe
+                                      ? Colors.white
+                                      : theme.colorScheme.onSurface,
+                                  fontSize: 15)),
+                          const SizedBox(height: 2),
+                          Text(time,
+                              style: TextStyle(
+                                  fontSize: 10,
+                                  color: isMe
+                                      ? Colors.white70
+                                      : theme.colorScheme.outline)),
+                        ]),
                   ),
                 );
               },
@@ -155,21 +184,31 @@ class _ChatScreenState extends State<ChatScreen> {
         )),
         // Input
         Container(
-          padding: EdgeInsets.fromLTRB(16, 8, 16, MediaQuery.of(context).viewInsets.bottom + 16),
+          padding: EdgeInsets.fromLTRB(
+              16, 8, 16, MediaQuery.of(context).viewInsets.bottom + 16),
           decoration: BoxDecoration(
             color: theme.colorScheme.surface,
-            boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.05), blurRadius: 8, offset: const Offset(0, -2))],
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(0.05),
+                  blurRadius: 8,
+                  offset: const Offset(0, -2))
+            ],
           ),
           child: Row(children: [
-            Expanded(child: TextField(
+            Expanded(
+                child: TextField(
               controller: _controller,
               textCapitalization: TextCapitalization.sentences,
               decoration: InputDecoration(
                 hintText: 'Message ${widget.otherName.split(' ').first}...',
                 filled: true,
-                fillColor: theme.colorScheme.surfaceVariant,
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(24), borderSide: BorderSide.none),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
+                fillColor: theme.colorScheme.surfaceContainerHighest,
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(24),
+                    borderSide: BorderSide.none),
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 18, vertical: 12),
               ),
               onSubmitted: (_) => _send(),
             )),
@@ -177,8 +216,10 @@ class _ChatScreenState extends State<ChatScreen> {
             GestureDetector(
               onTap: _send,
               child: Container(
-                width: 48, height: 48,
-                decoration: BoxDecoration(color: theme.colorScheme.primary, shape: BoxShape.circle),
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                    color: theme.colorScheme.primary, shape: BoxShape.circle),
                 child: const Icon(Icons.send, color: Colors.white, size: 22),
               ),
             ),

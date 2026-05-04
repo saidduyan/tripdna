@@ -16,11 +16,8 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _loading = false;
   bool _obscure = true;
   String? _error;
-
-  // ── Yeni eklenenler ────────────────────────────────────────
   List<String> _recentUsernames = [];
   List<String> _suggestions = [];
-  // ──────────────────────────────────────────────────────────
 
   @override
   void initState() {
@@ -36,8 +33,6 @@ class _LoginScreenState extends State<LoginScreen> {
     _passwordController.dispose();
     super.dispose();
   }
-
-  // ── Yeni metodlar ──────────────────────────────────────────
 
   Future<void> _loadRecentUsernames() async {
     final recent = await AuthService().getRecentUsernames();
@@ -70,7 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20)),
         title: const Text('Reset Password',
             style: TextStyle(fontWeight: FontWeight.bold)),
         content: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -101,7 +97,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.pop(ctx);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Reset link sent! Check your email 📧'),
+                      content:
+                          Text('Reset link sent! Check your email 📧'),
                       backgroundColor: Colors.green,
                     ),
                   );
@@ -111,7 +108,8 @@ class _LoginScreenState extends State<LoginScreen> {
                   Navigator.pop(ctx);
                   ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(
-                      content: Text('Email not found. Check and try again.'),
+                      content: Text(
+                          'Email not found. Check and try again.'),
                       backgroundColor: Colors.red,
                     ),
                   );
@@ -125,8 +123,6 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  // ──────────────────────────────────────────────────────────
-
   Future<void> _login() async {
     if (!_formKey.currentState!.validate()) return;
     setState(() {
@@ -138,7 +134,6 @@ class _LoginScreenState extends State<LoginScreen> {
         identifier: _identifierController.text,
         password: _passwordController.text,
       );
-      await AuthService().saveRecentUsername(_identifierController.text.trim());
     } catch (e) {
       setState(() => _error = _friendlyError(e.toString()));
     } finally {
@@ -147,15 +142,23 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   String _friendlyError(String raw) {
+    if (raw.contains('EMAIL_NOT_VERIFIED')) {
+      return raw.split(':').last;
+    }
     if (raw.contains('user-not-found') ||
         raw.contains('wrong-password') ||
         raw.contains('invalid-credential')) {
       return 'Incorrect email/username or password.';
     }
-    if (raw.contains('CONFIGURATION_NOT_FOUND')) {
-      return 'Firebase not configured. Check google-services.json and enable Email/Password auth in Console.';
+    if (raw.contains('Temporary or disposable')) {
+      return raw.replaceAll('Exception: ', '');
     }
-    if (raw.contains('network')) return 'Network error. Check your connection.';
+    if (raw.contains('CONFIGURATION_NOT_FOUND')) {
+      return 'Firebase not configured correctly.';
+    }
+    if (raw.contains('network')) {
+      return 'Network error. Check your connection.';
+    }
     return 'Login failed. Please try again.';
   }
 
@@ -168,7 +171,10 @@ class _LoginScreenState extends State<LoginScreen> {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [theme.colorScheme.primary, theme.colorScheme.secondary],
+            colors: [
+              theme.colorScheme.primary,
+              theme.colorScheme.secondary
+            ],
           ),
         ),
         child: SafeArea(
@@ -187,18 +193,20 @@ class _LoginScreenState extends State<LoginScreen> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(Icons.travel_explore,
-                            size: 56, color: theme.colorScheme.primary),
+                            size: 56,
+                            color: theme.colorScheme.primary),
                         const SizedBox(height: 8),
                         Text('TripDNA',
                             style: theme.textTheme.headlineMedium
-                                ?.copyWith(fontWeight: FontWeight.bold)),
+                                ?.copyWith(
+                                    fontWeight: FontWeight.bold)),
                         const SizedBox(height: 4),
                         Text('Sign in to continue',
-                            style: theme.textTheme.bodyMedium
-                                ?.copyWith(color: theme.colorScheme.outline)),
+                            style: theme.textTheme.bodyMedium?.copyWith(
+                                color: theme.colorScheme.outline)),
                         const SizedBox(height: 28),
 
-                        // ── Email/Username + suggestions ──
+                        // Email/Username + suggestions
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -210,51 +218,60 @@ class _LoginScreenState extends State<LoginScreen> {
                                 border: OutlineInputBorder(),
                               ),
                               onTap: () {
-                                if (_identifierController.text.isEmpty) {
-                                  setState(
-                                      () => _suggestions = _recentUsernames);
+                                if (_identifierController
+                                    .text.isEmpty) {
+                                  setState(() => _suggestions =
+                                      _recentUsernames);
                                 }
                               },
-                              validator: (v) =>
-                                  v == null || v.isEmpty ? 'Required' : null,
+                              validator: (v) => v == null || v.isEmpty
+                                  ? 'Required'
+                                  : null,
                             ),
                             if (_suggestions.isNotEmpty)
                               Container(
                                 decoration: BoxDecoration(
                                   color: theme.colorScheme.surface,
-                                  borderRadius: const BorderRadius.vertical(
-                                      bottom: Radius.circular(12)),
+                                  borderRadius:
+                                      const BorderRadius.vertical(
+                                          bottom:
+                                              Radius.circular(12)),
                                   border: Border.all(
-                                      color: theme.colorScheme.outlineVariant),
+                                      color: theme.colorScheme
+                                          .outlineVariant),
                                   boxShadow: [
                                     BoxShadow(
-                                      color:
-                                          Colors.black.withValues(alpha: 0.08),
+                                      color: Colors.black
+                                          .withValues(alpha: 0.08),
                                       blurRadius: 8,
                                       offset: const Offset(0, 4),
                                     )
                                   ],
                                 ),
                                 child: Column(
-                                  children: _suggestions.map((username) {
+                                  children:
+                                      _suggestions.map((username) {
                                     return ListTile(
                                       dense: true,
                                       leading: Icon(Icons.history,
                                           size: 18,
-                                          color: theme.colorScheme.outline),
+                                          color: theme
+                                              .colorScheme.outline),
                                       title: Text(username,
-                                          style: theme.textTheme.bodyMedium),
+                                          style: theme
+                                              .textTheme.bodyMedium),
                                       trailing: Icon(Icons.north_west,
                                           size: 16,
-                                          color: theme.colorScheme.outline),
-                                      onTap: () => _selectSuggestion(username),
+                                          color: theme
+                                              .colorScheme.outline),
+                                      onTap: () =>
+                                          _selectSuggestion(username),
                                     );
                                   }).toList(),
                                 ),
                               ),
                           ],
                         ),
-                        // ─────────────────────────────────
 
                         const SizedBox(height: 16),
 
@@ -269,12 +286,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               icon: Icon(_obscure
                                   ? Icons.visibility_off
                                   : Icons.visibility),
-                              onPressed: () =>
-                                  setState(() => _obscure = !_obscure),
+                              onPressed: () => setState(
+                                  () => _obscure = !_obscure),
                             ),
                           ),
-                          validator: (v) =>
-                              v == null || v.isEmpty ? 'Required' : null,
+                          validator: (v) => v == null || v.isEmpty
+                              ? 'Required'
+                              : null,
                         ),
 
                         if (_error != null) ...[
@@ -287,13 +305,48 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             child: Text(_error!,
                                 style: TextStyle(
-                                    color: theme.colorScheme.onErrorContainer)),
+                                    color: theme.colorScheme
+                                        .onErrorContainer)),
                           ),
+                          if (_error!.contains('verify your email')) ...[
+                            const SizedBox(height: 8),
+                            TextButton.icon(
+                              icon: const Icon(Icons.send, size: 16),
+                              label: const Text(
+                                  'Resend Verification Email'),
+                              onPressed: () async {
+                                try {
+                                  await AuthService()
+                                      .resendVerificationEmail(
+                                    _identifierController.text.trim(),
+                                    _passwordController.text,
+                                  );
+                                  if (mounted) {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text(
+                                          'Verification email sent! Check your inbox 📧'),
+                                      backgroundColor: Colors.green,
+                                    ));
+                                  }
+                                } catch (e) {
+                                  if (mounted) {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(const SnackBar(
+                                      content: Text(
+                                          'Could not resend. Try again.'),
+                                      backgroundColor: Colors.red,
+                                    ));
+                                  }
+                                }
+                              },
+                            ),
+                          ],
                         ],
 
                         const SizedBox(height: 16),
 
-                        // ── Forgot password ───────────────
+                        // Forgot password
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
@@ -301,7 +354,6 @@ class _LoginScreenState extends State<LoginScreen> {
                             child: const Text('Forgot password?'),
                           ),
                         ),
-                        // ─────────────────────────────────
 
                         const SizedBox(height: 8),
 
@@ -310,16 +362,18 @@ class _LoginScreenState extends State<LoginScreen> {
                           child: FilledButton(
                             onPressed: _loading ? null : _login,
                             style: FilledButton.styleFrom(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 16),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(12))),
+                                    borderRadius:
+                                        BorderRadius.circular(12))),
                             child: _loading
                                 ? const SizedBox(
                                     height: 20,
                                     width: 20,
                                     child: CircularProgressIndicator(
-                                        strokeWidth: 2, color: Colors.white))
+                                        strokeWidth: 2,
+                                        color: Colors.white))
                                 : const Text('Sign In',
                                     style: TextStyle(fontSize: 16)),
                           ),
@@ -331,9 +385,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           onPressed: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => const RegisterScreen()),
+                                builder: (_) =>
+                                    const RegisterScreen()),
                           ),
-                          child: const Text("Don't have an account? Register"),
+                          child: const Text(
+                              "Don't have an account? Register"),
                         ),
                       ],
                     ),

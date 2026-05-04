@@ -17,19 +17,13 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -59,4 +53,24 @@ class DefaultFirebaseOptions {
     projectId: 'tripdna',
     storageBucket: 'tripdna.firebasestorage.app',
   );
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBNptonazdxa9vpAgSigyogyo_P903KmEE',
+    appId: '1:757134714165:web:a2af4c5ea2ba0091d7187c',
+    messagingSenderId: '757134714165',
+    projectId: 'tripdna',
+    authDomain: 'tripdna.firebaseapp.com',
+    storageBucket: 'tripdna.firebasestorage.app',
+    measurementId: 'G-N5L0P7TM3K',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDYG37-pgRT_83hPjT7Q3ft88eEqF9jT7k',
+    appId: '1:757134714165:ios:791d3ae7d2a5052dd7187c',
+    messagingSenderId: '757134714165',
+    projectId: 'tripdna',
+    storageBucket: 'tripdna.firebasestorage.app',
+    iosBundleId: 'com.example.tripdna',
+  );
+
 }
